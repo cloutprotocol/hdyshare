@@ -1,0 +1,454 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+   <head>
+      <title>hdyshare.com -</title>
+      <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=0.75">
+
+      <link rel="canonical" href="http://archive.today/LZ6Ku"/>
+      <style type="text/css">@font-face {
+         font-family:VideoJS;
+         src: url('820f321103c5e5007c2410af16ca60e2a245caec') format(woff), url('2b5dd0ecc0122d05920416d58b7958c3aa0b0611') format(truetype);
+         font-weight:normal;
+         font-style:normal;
+         }
+         body {
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           min-height: 100vh;
+           margin: 0;
+         }
+         p{
+           font-family: 'VideoJS', sans-serif;
+           font-size: 16px;
+           color: #333;
+           line-height:9px;
+           font-weight:600;
+         }
+         p strong{
+           color: #000000;
+           line-height:9px;
+           font-weight:900 !important;
+         }
+         .container {
+           width:1024px;
+           margin:0 auto;
+           box-sizing: border-box;
+         }
+         .audio-player {
+          display: flex;
+          align-items: center;
+          background: #f5f5f5;
+          padding: 0px 20px;
+          border-radius: 5px;
+          width: 100%;
+          margin:0px auto;
+          height:90px;
+          max-width:915px;
+        }
+
+        .play-button {
+          width: 50px;
+          height: 50px;
+          background: linear-gradient(145deg, #ffd700, #ffa500);
+          border: none;
+          border-radius: 50%;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 15px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .play-icon {
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 10px 0 10px 18px;
+          border-color: transparent transparent transparent white;
+          margin-left: 4px;
+        }
+
+        .pause-icon {
+          display: none;
+          width: 18px;
+          height: 18px;
+          position: relative;
+        }
+
+        .pause-icon::before,
+        .pause-icon::after {
+          content: '';
+          position: absolute;
+          width: 6px;
+          height: 18px;
+          background: white;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        .pause-icon::before {
+          left: 0px;
+        }
+
+        .pause-icon::after {
+          right: 0px;
+        }
+
+        .progress-bar {
+          flex-grow: 1;
+          height: 50px;
+          background: url('waveform.png') no-repeat;
+          background-size: 100% 100%;
+          border-radius: 5px;
+          cursor: pointer;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .progress-fill {
+          height: 100%;
+          background: rgba(255, 165, 0, 0.5);
+          width: 0%;
+          transition: width 0.1s linear;
+        }
+
+        .time-display {
+          font-family: monospace;
+          font-size: 12px;
+          color: #666;
+          margin-left: 10px;
+          min-width: 85px;
+        }
+
+        .download-link {
+          margin-left: 15px;
+        }
+    </style>
+
+   </head>
+   <body>
+      <div class="container">
+             <div class="html" style="text-align:left;overflow-x:visible;overflow-y:visible; margin: 0 auto;">
+            <meta name="keywords"/>
+            <meta name="description"/>
+            <div class="body" style="vertical-align:bottom;min-height:1167px;color:rgb(0, 0, 0);text-align:left;font-size:14px;font-family:verdana;overflow-x:visible;overflow-y:visible;margin: 8px; ">
+               <div style="text-align:left;max-width:984px;min-width:984px;clear:both;margin: 0px auto; padding: 0px; ">
+                  <div style="font-size:12px;color:rgb(119, 119, 119);position:absolute;right:20px;top:6px;">
+                     <!-- <form action="https://archive.today/LZ6Ku#" method="post">
+                        <div>
+                           <div style="background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAJ3SURBVDjLpZNtSNNRFIcNKunF1rZWBMJqKaSiX9RP1dClsjldA42slW0q5oxZiuHrlqllLayoaJa2jbm1Lc3QUZpKFmmaTMsaRp+kMgjBheSmTL2//kqMBJlFHx44XM7vOfdyuH4A/P6HFQ9zo7cpa/mM6RvCrVDzaVDy6C5JJKv6rwSnIhlFd0R0Up/GwF2KWyl01CTSkM/dQoQRzAurCjRCGnRUUE2FaoSL0HExiYVzsQwcj6RNrSqo4W5Gh6Yc4+1qDDTkIy+GhYK4nTgdz0H2PrrHUJzs71NQn86enPn+CVN9GnzruoYR63mMPbkC59gQzDl7pt7rc9f7FNyUhPY6Bx9gwt4E9zszhWWpdg6ZcS8j3O7zCTuEpnXB+3MNZkUUZu0NmHE8XsL91oSWwiiEc3MeseLrN6woYCWa/Zl8ozyQ3w3Hl2lYy0SwlCUvsVi/Gv2JwITnYPDun2Hy6jYuEzAF1jUBCVYpO6kXo+NuGMeBAgcgfwNkvgBOPgUqXgKvP7rBFvRhE1crp8Vq1noFYSlacVyqGk0D86gbART9BDk9BFnPCNJbCY5aCFL1Cyhtp0RWAp74MsKSrkq9guHyvfMTtmLc1togpZoyqYmyNoITzVTYRJCiXYBIQ3CwFqi83o3JDhX6C0M8XsGIMoQ4OyuRlq1DdZcLkmbgGDX1iIEKNxAcbgTEOqC4ZRaJ6Ub86K7CYFEo8Qo+GBQlQyXBczLZpbloaQ9k1NUz/kD2myBBKxRZpa5hVcQslalatoUxizxAVVrN3CW21bFj9F858Q9dnIRmDyeuybM71uxmH9BNBB1q6zybV7H9s1Ue4PM3/gu/AEbfqfWy2twsAAAAAElFTkSuQmCC');background-size:14px 14px;width:14px;height:14px;display:inline-block;background-repeat: no-repeat; margin: 0px; padding: 0px 2px 0px 0px; "></div>
+                           <div style="display:inline-block;position:relative;top:-4px;">
+                              <span>Username:</span>
+                              <input name="login" size="22" value="" style="text-align:left;font-family:sans-serif;height:11px;margin-right:4px;font-size:9px;color:rgb(21, 89, 141);"/>
+                              <div style="height:15px;width:114px;z-index:999999999;left:0px;top:0px;position:absolute"></div>
+                           </div>
+                           <div style="background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAH2SURBVDjLjZNLTxNRGIaJv6ZNWeBwkZFLQtGAC4l/wKULV+7YILeSYukEUhJoSASVuCI0hpAYDSUQCJBSoAaC0wbBUi4aWphpO52Zlpa+nnOqCAptJ3k3M3me73LOlAAoyZfDqQdOEvyO89/vRcGZ5HeWmySFYdWHVOQN0vE58jrLJMFJ82hewVU4+bMfqdPxP9VBn+A4D88wP59PwFqmsH7UgeTJEMlsTuIyI5uRsDfCMcmtAtoyhVmOu5kkHZuFsiNA3XuEi+QCdhxluL0D/SvpoO+vhIksiItNiPqqyXgfIL403gjfoTsIL70gQBdim3VQvz2FFnwOxf8E8kYF0rIVYqcRM70Vgf/Pe/ohwsutOJdcpBpP4Mek+jPEfbWQVzkG+7tNcNsqt68tkcLZTIzM6YZ21IbolgHq9j1o+z04nKhHRnlH2p6A32LCvFD55fIYr960VHgSSqCFVDJBEeugh+zw2jnpc0/5rthuRMBaioWBqrVrFylXOUpankIi0AjJY0DC3wD9oA9rAnc2bat+n++2UkH8XHaTZfGQlg3QdlsIbIVX4KSPAv+60L+SO/PECmJiI1lYM9SQBR7b3einfn6kEMwEIZd5Q48sQQt1Qv/xFqt2Tp5x3B8sBmYC71h926az6njdUR6hMy8O17wqFqb5Bd2o/0SFzIZrAAAAAElFTkSuQmCC');background-size:14px 14px;width:14px;height:14px;display:inline-block;background-repeat: no-repeat; margin: 0px; padding: 0px 2px 0px 0px; "></div>
+                           <div style="display:inline-block;position:relative;top:-4px;">
+                              <span>Password:</span>
+                              <input type="text" name="pass" size="22" value="" style="text-align:left;font-family:sans-serif;height:11px;font-size:9px;color:rgb(21, 89, 141);"/>
+                              <input type="submit" value="Login" style="font-weight:bolder;background-color: rgb(250, 231, 147); color:rgb(0, 0, 0);font-size:10px;font-family:verdana;height:17px;width:60px;vertical-align:bottom;border-width: 1px; border-style: solid; border-color: rgb(0, 0, 0); "/><br/>
+                              <div style="height:15px;width:114px;z-index:999999999;left:0px;top:0px;position:absolute"></div>
+                              <div style="height:17px;width:60px;z-index:999999999;left:0px;top:0px;position:absolute"></div>
+                           </div>
+                        </div>
+                        <div style="float:right;">
+                           <input type="checkbox" name="remember" value="" style="text-align:left;font-family:sans-serif;"/>
+                           <font style="color:rgb(119, 119, 119);font-size:9px;vertical-align:text-top;">Remember Me |</font>
+                           <a href="http://archive.today/o/LZ6Ku/www.hdyshare.com/sites/forgot.jsp" style="color:rgb(119, 119, 119);text-decoration:none;font-size:9px;vertical-align:text-top;" >Forgot Password?</a>
+                        </div>
+                     </form> -->
+                  </div>
+                  <div style="text-align:center;height:96px;margin: 0px auto; ">
+                     <a href="#"  style="text-decoration:underline;color:rgb(0, 0, 0);">
+                        <div style="background-image:url('9b3efd4d2ac1687e26bfe04e54087923e5fb0335.png');width:275px;height:86px;margin-left:auto;margin-right:auto;background-repeat: no-repeat; padding: 0px; "></div>
+                     </a>
+                     <br/>
+                  </div>
+                  <div style="z-index:8000;background-color: rgb(250, 231, 147); width:984px;border-top-left-radius:6px 6px;border-top-right-radius:6px 6px;border-bottom-left-radius:6px 6px;border-bottom-right-radius:6px 6px;margin: 0px; padding: 2px; ">
+                     <div style="background-color: rgb(255, 253, 209); color:rgb(0, 0, 0);text-align:left;height:19px;font-family:tahoma;border-top-left-radius:4px 4px;border-top-right-radius:4px 4px;border-bottom-left-radius:4px 4px;border-bottom-right-radius:4px 4px;border-width: 0px; border-style: none; margin: 0px; padding: 8px; border-color: white; ">
+                        <span style="float:left;">
+                        <a href="#" style="text-decoration:none;font-size:13px;font-weight:bolder;color:black;margin-left:7px;margin-right:7px;" >Upload Files</a>
+                        | <a href="#"style="text-decoration:none;font-size:13px;font-weight:bolder;color:black;margin-left:7px;margin-right:7px;" >F.A.Q</a>
+                        | <a href="#" style="text-decoration:none;font-size:13px;font-weight:bolder;color:black;margin-left:7px;margin-right:7px;" >Upload Tools</a>
+                        | <a href="#" style="text-decoration:none;font-size:13px;font-weight:bolder;color:black;margin-left:7px;margin-right:7px;" >Our Blog</a>
+                        | <a href="#"  style="text-decoration:none;font-size:13px;font-weight:bolder;color:black;margin-left:7px;margin-right:7px;">Contact Us</a>
+                        </span>
+                        <span style="float:right;margin-top:-2px;">
+                           <ul style="position:relative;list-style: none outside none; margin: 0px; padding: 0px; ">
+                              <li style="float:left;width:115px;position:relative;border-width: 1px; border-style: solid; margin: 0px; padding: 0px; border-color: rgb(250, 231, 147); ">
+                                 <a href="#" title="English" style="background-image:url('data:image/gif;base64,R0lGODlhEAALANUAAGNjtvr6+vb29fHx8fxGRvkQEP15eatjSuNjSjx6+TV0+f2Kd+np6dvb2PxUVPx4YttjSvsrK5q7/PxlZrpjSvw6Oubm5e7u7sljSgR09Z1jSvT080iB+gBMtkF9+vofHwBpu/f39uLi3/syMtVjSqG+/C9y+Ozs7KLA/GNlwPyBbO3t6gNx5QArs/2XhpGRgKysn+z+/rS0qPR0XuXl/P7KwcnJwf39Wzh3+f7+/fv/+vHx7wNv4df+/f3h3GNnxCH5BAAAAAAALAAAAAAQAAsAAAaMwJ/wl0oBjqoHYgmB/HIoXSkgoQYCoawA9kNxOJ5EAmcyTByEiouUmnoEiYspMxhcTreNrR1OKOYgaBUjEQsYAAEJAwonLCIddwwMFj0yABI4fzwgHS2DER8fCwciAQIbG3aRkxYNPi8qNWZoaRGgBbgqGg0BMVqoqTsrNBYiM0sITU0kGBQUBwca0kEAOw==');background-color: transparent; font:normal normal bold 12px/20px Arial, Helvetica, sans-serif;color:rgb(0, 0, 0);display:block;text-decoration:none;background-position: 92% 5px; background-repeat: no-repeat; padding: 0px 9px; " >
+                                    <div style="background-image:url('data:image/gif;base64,R0lGODlhCQAFAIABAHp6cv///yH5BAEAAAEALAAAAAAJAAUAAAIKhH+BGYoNGWxgFgA7');display:inline-block;width:9px;height:5px;float:left;background-repeat: no-repeat; margin: 8px 5px 0px -5px; padding: 0px; "></div>
+                                    <span>English</span>
+                                 </a>
+                                 <ul style="z-index:8000;background-color: rgb(255, 254, 248); border-bottom-color:rgb(250, 231, 147);width:115px;position:absolute;top:-999em;list-style: none outside none; border-width: medium medium 1px; border-style: none none solid; margin: 0px; padding: 0px; ">
+                                    <li style="width:115px;position:relative;float:none;border-width: 0px; border-style: none; margin: 0px; padding: 0px; border-color: white; "><a href="#" title="Deutsch" style="background-image:url('data:image/gif;base64,R0lGODlhEAALANUAAPDcbqU/L/x1dfnrl6h9L7W1q6iGL/NHR5mLffWmVvayaZSUh6SkmWloaUpIOnhMS+0pKfblh518fHh4ePpmZvyyqfE8PJ13L/tsbPjlZfXhV0pKR+rTLO+SNu7YOoxlZfLcSPPgevKbRLOKL1hYWOuJJ/lgYLakL2k5OT8/OvZSUu8zM7q6sfdZWb1BMZuEL/zVpMq4r/KAcINbW+bNHeoeHmZJPOiCHe/gba2to5VycoCBgfvxopyckOjPIj8/LyH5BAAAAAAALAAAAAAQAAsAAAaHwI1j6Ej9jsikg8UsFHJQBqPXWyx+y91uMml4SaTNJoX42WISiU73+cwecBSq7KoIBBiKqaU6HCwrEDIBdXh6fH6AEIKEFXl7fX+BEDWDBDAKCgmbIiIdHSUlNwoBJzwZGRoaICAeHhwcPjQ4LycDtwMRuiG8AL4AFyPCIwQEBscvBBfKFxdBADs=');background-color: transparent; font:normal normal bold 12px/20px Arial, Helvetica, sans-serif;color:rgb(0, 0, 0);display:block;text-decoration:none;background-position: 92% 5px; background-repeat: no-repeat; border-width: 1px 1px 0px; border-style: solid solid none; padding: 0px 9px; border-color: rgb(250, 231, 147) rgb(250, 231, 147) white; " >Deutsch</a></li>
+                                    <li style="width:115px;position:relative;float:none;border-width: 0px; border-style: none; margin: 0px; padding: 0px; border-color: white; "><a href="#" title="Nederlands" style="background-image:url('data:image/gif;base64,R0lGODlhEAALANUAAAABdP7+/jRusgAhj/picxZYp/UAAPLy8vr6+vj4+Pb29v56iVqKw/1da0V7ujpytSpmrusAAGSSx/pCUftUZP11gwAAR/96hgAAWe7v7yFgq0J3tw1Rokt/vAAAPFCCv1SFwS9qrtHR0fk8Tf6CkdXV1ftqevcxQvg3Rz52uPxMWvVWavZabv8VMflXaP5ZZ3eezv6XpC5qsvYsPPv7+/pQX/5/j/htfvlIV/T19fxwgPX19fz8/P0AAPT09P8AACH5BAAAAAAALAAAAAAQAAsAAAaFwJ/w1ysWDUhkJPJbLC6Vis5kIhAaLkqNeWk0XloVbjJCnWa4SCtGsjmltyqBtbpFDoE8j0dDIBIJCjs+OyUZenx+gII+Bzkih3t9f4GDBwc+IgMwDCAfHQ4bDwIhEBAaGxYAEg4pozKnGgUFHBwhHqsMnZ+hrgKkELgAwxjFxRbIHsoeQQA7');background-color: transparent; font:normal normal bold 12px/20px Arial, Helvetica, sans-serif;color:rgb(0, 0, 0);display:block;text-decoration:none;background-position: 92% 5px; background-repeat: no-repeat; border-width: 1px 1px 0px; border-style: solid solid none; padding: 0px 9px; border-color: rgb(250, 231, 147) rgb(250, 231, 147) white; " >Nederlands</a></li>
+                                    <li style="width:115px;position:relative;float:none;border-width: 0px; border-style: none; margin: 0px; padding: 0px; border-color: white; "><a href="#" title="Francais" style="background-image:url('data:image/gif;base64,R0lGODlhEAALANUAAKqqqpqv2fHx8e1kVsTS7Vd7xenp6vSIft7e3viVjNTU1NgAALTF57zL6WaHzOpqXe7u7qG13ebm5uTk5O52arLD5aa53vN+cvf396q94e4JAHKS0uQAAOpXSfFwZMHP68/Pz/BqXMYAAK+/48wAAOxuYvN3a+lmWutdT+hSQ+ZNPvT09Lu7uxdHpfj4+LfI5+xeUOzr60Rsu+Li4p+fn2+P0aa54LOwsK6/5CxXsK7A5Ojo6O3t7evr6+zs7HOV0yH5BAAAAAAALAAAAAAQAAsAAAaLwJ/wt0EgFAoQSKPhOH+E6MeFqa5WicThwIG+GBWer2cwSC4mz2Gx+YB1kN7YnA5dFrVPBZeB8GIGOxIeIQMUCw4NfDYCfjxkhTCHDi8ZFhGNY4IDKB0lJAUvlwEQmhITnSkPoBURAQE+gaczHSkqJyIyI5YRYrISJQ8nA7k5xi0sLDcAADQkJCLRQQA7');background-color: transparent; font:normal normal bold 12px/20px Arial, Helvetica, sans-serif;color:rgb(0, 0, 0);display:block;text-decoration:none;background-position: 92% 5px; background-repeat: no-repeat; border-width: 1px 1px 0px; border-style: solid solid none; padding: 0px 9px; border-color: rgb(250, 231, 147) rgb(250, 231, 147) white; " >Francais</a></li>
+                                    <li style="width:115px;position:relative;float:none;border-width: 0px; border-style: none; margin: 0px; padding: 0px; border-color: white; "><a href="#" title="Magyar" style="background-image:url('data:image/gif;base64,R0lGODlhEAALANUAAORjY2GtYsYAAKoAAABIADSUNFSlVOJVVd1MTORdXeXl5eZrawANAC6OLg59Duh0dPPz80WeRQAlALwAAD2YPTqWOup7e7UAAAA4AOFMTC+RLyqOKiSLJNYqKh+HHxSBFN5CQtw8Pdo3NxmEGfb29vj4+P7+/vr6+vv7+/n5+ff39+FRUd9HR+RZWdkxMel5eUCaQEmhSd9TU0ufS/v8+2qzauJcXDOQMvT19dtERPX19fz8/PT09P39/c0AAAAAACH5BAAAAAAALAAAAAAQAAsAAAaCQJ9QKCgWJ8jLZeCzWF6vx2OxAABsBxmCaUkkWodVhgUKiVwdFvP1DY/L504nN+iZTL3dDnVKlVQkOjw6CnZ5e31/gTwQOIV5NHx+gIIQEDwKBDUxETAVBRobHB4jHw43PwQBnZ+ho6UODg2pAQEGtzOdFJ83DbMYwBLCDMQ/xsc/QQA7');background-color: transparent; font:normal normal bold 12px/20px Arial, Helvetica, sans-serif;color:rgb(0, 0, 0);display:block;text-decoration:none;background-position: 92% 5px; background-repeat: no-repeat; border-width: 1px 1px 0px; border-style: solid solid none; padding: 0px 9px; border-color: rgb(250, 231, 147) rgb(250, 231, 147) white; " >Magyar</a></li>
+                                    <li style="width:115px;position:relative;float:none;border-width: 0px; border-style: none; margin: 0px; padding: 0px; border-color: white; "><a href="#" title="Lietuvių" style="background-image:url('data:image/gif;base64,R0lGODlhEAALANUAAOHbVN3WSOu1APvkZOcqKuxUVEOxQzOqM9nRNupGRlW6VbkAAMcAABicGHLGc+INDUq1SjytPMpKN+QZGf3rgvzpe9kAAPPEAPnfRb0qFPziVfBhYvfbO/znc/rla/fKAP3UAPffVe09PdBZR8Q7J/3lXeY7OwAzAOMxMSWiJSqlKwB7AE+3T+bgZHcAAP7oaMEzHx+gH85SP6ubAPrgTSCfIACDAOXfX/jNAOvmf+s0NObAAPjhXsZEMdp6avvRACH5BAAAAAAALAAAAAAQAAsAAAaHQNBv+MPhPp+L8iJo/ijQirTT8XgGPF5IAKK8XoNSSaOhYTAcznaXa91ugHhgjqgHZjaHQsGCGAwRBwcqKTURJyt6fX+Bg4UNh4mLgIKEMQ0NBycLPiMjMhISPSQkMBmnPS4WGwkiIjoEsRMTD7UoC6sbBbsJvSYmKMEEuBbFDMfHCwwLzMxBADs=');background-color: transparent; font:normal normal bold 12px/20px Arial, Helvetica, sans-serif;color:rgb(0, 0, 0);display:block;text-decoration:none;background-position: 92% 5px; background-repeat: no-repeat; border-width: 1px 1px 0px; border-style: solid solid none; padding: 0px 9px; border-color: rgb(250, 231, 147) rgb(250, 231, 147) white; " >Lietuvių</a></li>
+                                    <li style="width:115px;position:relative;float:none;border-width: 0px; border-style: none; margin: 0px; padding: 0px; border-color: white; "><a href="#" title="Polski" style="background-image:url('data:image/gif;base64,R0lGODlhEAALANUAAP3u7vxubvU7O/ZKSvQAAOfW1vIuLvhYWfwAAPhgYPENDf38/fIQEPpFRfc1NfcvL/YqKu4AAPUkJOYAAOIAAPQfH/k6OuoAAPtKSfMzM/MZGd8AAPX19fo/P/3x8fIUFPpdXfdPT/hTVPxPT/fp6ftlZe/h4fVDQ/10dPTm5v3v8f6OjunZ2evd3fnr6/vt7ftoaPxqau3f3/Hj4/v7+/j4+N0AAPn5+fb29vr6+vz8/Pf39/39/f/x8f7+/v///yH5BAAAAAAALAAAAAAQAAsAAAaFwJ6w51EBAC8XKZWamWS9389H5fF0OlruVtu1olSfNbvt4nasXnis5e5wHFzBU12Q3XAOp4BYoQIBMCUJIAciIQMnCRMIASMYDR0WDg8QEhUaHw4UCDGQkpSWmB8MGRsIJZGTlZeZDAoGGwSEhogNJwICGRkGBjYEwBHCFxcTExQUGzbLQQA7');background-color: transparent; font:normal normal bold 12px/20px Arial, Helvetica, sans-serif;color:rgb(0, 0, 0);display:block;text-decoration:none;background-position: 92% 5px; background-repeat: no-repeat; border-width: 1px 1px 0px; border-style: solid solid none; padding: 0px 9px; border-color: rgb(250, 231, 147) rgb(250, 231, 147) white; " >Polski</a></li>
+                                    <li style="width:115px;position:relative;float:none;border-width: 0px; border-style: none; margin: 0px; padding: 0px; border-color: white; "><a href="#" title="Português" style="background-image:url('data:image/gif;base64,R0lGODlhEAALANUAALa6Q1qbWvKtR/QtLO5zVvQcHPUyMpu0UWqlauipNflXVwA2AOHJNXSsdPUkJPU8POUAAPdLS0mRSfxjY1KVUj2HPesAAP1ra/ZERPITE/QAAMnIVPwAAPENDQAUAHuwe/k8Pfc3NuAAAHiueOqDdvXb1M7IT/nBUdnCPP1wcWmiXNbo+lORRfU8Nud4XPBBMEGRNO7d3e18TmCfYfM1KfRnTOLQV+66NvtTR/C4PUSORPpCQuppKubQ1N0AAABNACH5BAAAAAAALAAAAAAQAAsAAAaOwJ9wyClyNEiNxfL7fEajRupymUwU2AjzM1MdNicBbgcKGQba3yhgsxFqAkH57MBAfo3ARlbqEXItdAUPdw0UJjIxKy43LwMOBYMQCwgUBwAuJAwMj5EZIZMIEiwAKAkJPJAFGRkGIpQ6FRUwAzSqGR0dA68zAQEUFBEYGA8hZgMDPgsezMxLENAiIj7UQQA7');background-color: transparent; font:normal normal bold 12px/20px Arial, Helvetica, sans-serif;color:rgb(0, 0, 0);display:block;text-decoration:none;background-position: 92% 5px; background-repeat: no-repeat; border-width: 1px 1px 0px; border-style: solid solid none; padding: 0px 9px; border-color: rgb(250, 231, 147) rgb(250, 231, 147) white; " >Português</a></li>
+                                    <li style="width:115px;position:relative;float:none;border-width: 0px; border-style: none; margin: 0px; padding: 0px; border-color: white; "><a href="#" title="Română" style="background-image:url('data:image/gif;base64,R0lGODlhEAALANUAAPMDA/f3LVyD3ekAAFR83fXZAAAix/j4ePQxMfdJSflXV/PzU/UsLPMcHPPzPPbnKOe8AAACuPTkHPUkJPX1S3qa5P39bWSI3kp02nSW4/ISEvn5O/r6Qfj4NUBs2T1q1/U9PfbhAAAArfv7R/z8TPX1JE943OAAAPY3N1iA3vfpMPf3RGqO4G+R4OvBAO/dAPb2WP39UfvwYPz8ZeOpAHeY5/T0HkVw10Vx2/nsPQAQvvTnOfjqNvLyQwAdw90AACH5BAAAAAAALAAAAAAQAAsAAAaIQINv6HuFjq8CYDkY+CrQ2sFimc1kimzCWREIUrAYacTJoRCM7fNLgI05Gx56os6kCKYFedNRMSYNIAM6GXgYFHAdAQ+AgYMtJhg4PXwBiw0NGignESwYNx49igElEpkaCJwXNx8fDpYlNhIatKkiF2wLFCsrDjtnaD8RIsQiEC4QyTQnJz/OQQA7');background-color: transparent; font:normal normal bold 12px/20px Arial, Helvetica, sans-serif;color:rgb(0, 0, 0);display:block;text-decoration:none;background-position: 92% 5px; background-repeat: no-repeat; border-width: 1px 1px 0px; border-style: solid solid none; padding: 0px 9px; border-color: rgb(250, 231, 147) rgb(250, 231, 147) white; " >Română</a></li>
+                                    <li style="width:115px;position:relative;float:none;border-width: 0px; border-style: none; margin: 0px; padding: 0px; border-color: white; "><a href="#" title="Русский" style="background-image:url('data:image/gif;base64,R0lGODlhEAALANUAAI2N+PLy/fQtLRgY8889aJyc/vz8/McnVvMWFjAw91VV/ePk7/pbW/xkZCor9oOD9yIi9fr6+vf39/hQUPo9PXR0/t7e6vb29pWV/NJHcOwAAPdERPU7O/MAAEpK/cMcTeUAAD8/9e/v+vM0NL4SRfENDQAA5kZG+0BA+jY29zs7+AAA/U9P/OAAAPg0NG9v/ezs9rMAAOjo8n199dxqjPpERHsAAMoyX/gAALGx/lBP/fUhId0AAP7+/vX1/////yH5BAAAAAAALAAAAAAQAAsAAAaGQJ9QGCiKRDCYTLZY+H6/nrRnqBoiEYnE8pxar1nJZevJFc6YNGD9eMwAplVFodB5TihVKuGAQEJxcyx3eXt9EAMqcS+DeHp8fgMDKSYxNBkZBAQ3NwcHHx8kJDc2OA01FBwuAgI7OwgIJSUCLaYMDBO5GxscHCMjrDwdwxrFxSDILS08zEEAOw==');background-color: transparent; font:normal normal bold 12px/20px Arial, Helvetica, sans-serif;color:rgb(0, 0, 0);display:block;text-decoration:none;background-position: 92% 5px; background-repeat: no-repeat; border-width: 1px 1px 0px; border-style: solid solid none; padding: 0px 9px; border-color: rgb(250, 231, 147) rgb(250, 231, 147) white; " >Русский</a></li>
+                                    <li style="width:115px;position:relative;float:none;border-width: 0px; border-style: none; margin: 0px; padding: 0px; border-color: white; "><a href="#" title="Español" style="background-image:url('data:image/gif;base64,R0lGODlhEAALANUAAPxcXPpTU/X1Jfb2K/QtLfxjY+bmAP5yc/7+dvMWFv39APz8TOwAAPMAAP39bfLyE/7+Wvv7RfdLS/pERPQzM/k8PfDyQfT1O/1ra/96evdEROxoVfU7O+UAAPg2NvENDfb2MPPzGfkAAPT0H/j4NuAAAPn5PPXDsf39U/F+V+7fTu3gjfUhIezT1Pnx1vXq4ra7nezhQvj0S9/fAPLzVfTuV+xTUfxMTPK9sMDOqOCMUeSnSuvJS90AAP0AAP8AACH5BAAAAAAALAAAAAAQAAsAAAaFwJ/w5yv6RMiGksH4ZZ6ZwwGDKRQAgYCkmQF4s7fJpOKhELYKBARSU8kiERMJNBDIDGkILbVZWeR0AiMXeAgoJxstODFzdSMhhAoOCy46Ni8qgY8PkZM5PDswFo4hDw8gMyIFY2QEBCwsCQkfHwQlql9aGhocHBRmBD1KDUzFHcclJT3LQQA7');background-color: transparent; font:normal normal bold 12px/20px Arial, Helvetica, sans-serif;color:rgb(0, 0, 0);display:block;text-decoration:none;background-position: 92% 5px; background-repeat: no-repeat; border-width: 1px 1px 0px; border-style: solid solid none; padding: 0px 9px; border-color: rgb(250, 231, 147) rgb(250, 231, 147) white; " >Español</a></li>
+                                    <li style="width:115px;position:relative;float:none;border-width: 0px; border-style: none; margin: 0px; padding: 0px; border-color: white; "><a href="#" title="Svenska" style="background-image:url('data:image/gif;base64,R0lGODlhEAALANUAAEaOsv7jdQAAMvnUO/PJGzOCqSx8pBlsovXMI+WLAFydvWulw0yStf29APXRPfjSNRJpnRxxoDN9qQAkbOybADmFqz2Jrg1plgAJVvrWQEOLsGaiwCV5ogAAQ/3bUfvXRvbOK3uwyv7dWffQL1iZuWCfvgAwdP3cVAAAIfzZSwAZY/zaT3muyfbPMv3BAAATXffWS+2hAFOWtyN3of3cU/jYUFCTrvnZVViWwwBBf1ybu/LHFP3icPvZSTCAqABDgSH5BAAAAAAALAAAAAAQAAsAAAaMwJ/w52o0TKbJRPXCYDq/UIgVCPAWi01JR5IxoKGSQnTyMAAaS8VnAHRyLAWunLKl1waOpuMKkD0pHxkDDyMgCAgOCQ0BNCuBg4WHCASKDTwrPYKEhpQEOy0JJgtnkWwcEQcQEBIdExsAFpwGMxEREBcXBigTYiQ3NTBoFRUFbLtMTjEUFB0CzyjR0UEAOw==');background-color: transparent; font:normal normal bold 12px/20px Arial, Helvetica, sans-serif;color:rgb(0, 0, 0);display:block;text-decoration:none;background-position: 92% 5px; background-repeat: no-repeat; border-width: 1px 1px 0px; border-style: solid solid none; padding: 0px 9px; border-color: rgb(250, 231, 147) rgb(250, 231, 147) white; " >Svenska</a></li>
+                                    <li style="width:115px;position:relative;float:none;border-width: 0px; border-style: none; margin: 0px; padding: 0px; border-color: white; "><a href="#" title="Türkçe" style="font:normal normal bold 12px/20px Arial, Helvetica, sans-serif;color:rgb(0, 0, 0);display:block;text-decoration:none;border-width: 1px 1px 0px; border-style: solid solid none; padding: 0px 9px; border-color: rgb(250, 231, 147) rgb(250, 231, 147) white; " >Türkçe</a></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </span>
+                        <span style="float:right;margin-top:1px;font-size:13px;font-weight:bolder;color:black;">Select Language:  </span>
+                     </div>
+                  </div>
+                  <div style="background-color: rgb(250, 231, 147); width:984px;border-top-left-radius:6px 6px;border-top-right-radius:6px 6px;border-bottom-left-radius:6px 6px;border-bottom-right-radius:6px 6px;margin: 10px 0px 0px; padding: 2px; ">
+                     <div style="background-color: rgb(255, 254, 248); color:rgb(0, 0, 0);text-align:left;font-family:verdana;border-top-left-radius:4px 4px;border-top-right-radius:4px 4px;border-bottom-left-radius:4px 4px;border-bottom-right-radius:4px 4px;border-width: 0px; border-style: none; margin: 0px; padding: 0px; border-color: white; ">
+                        <table style="border-collapse:separate;border-spacing:0px;width:984px;;background-image:url('5fdccdf3bc65092f571c68ece0943197493079b2');background-color: transparent; background-position: 100% 0%; background-repeat: no-repeat; ">
+                           <tbody>
+                              <tr>
+                                 <td style="color:rgb(0, 0, 0);padding: 0px; ">
+                                    <div style="position:relative;width:984px;margin: 15px -15px 15px 15px; float:left; text-align:left;">
+                                       <div style="width:100%;margin: 10px; float:left; text-align:left;">
+                                          <div class="" style="float:left; text-align:left;">
+                                                <h3 style="color:rgb(223, 0, 0); line-height:0px">You have requested the file:</h3>
+                                                <p><strong>Name:</strong> outlaw.mp3</p>
+                                                <p><strong>Size:</strong> 5.6 MB</p>
+                                                <p><strong>Uploaded:</strong> 09-11-2024 04:20</p>
+                                                <p><strong>Last download:</strong> 09-11-2024 04:20</p>
+                                                
+                                                <div class="social-share" style="float:left; text-align:left;">
+                                                  <!-- Add placeholders for social media share buttons -->
+                                                </div>
+                                                
+                                                <a href="outlaw.mp3" class="download-button" style="float: right; position:absolute;right: 20px;top:20px; cursor: pointer;"><img src="download.png" alt="Download Now"></a>
+                                              </div>
+                                              
+                                             </div>
+                                             <a href="outlaw.mp3" download class="download-link">
+                                             </a>
+                                          </div>
+                                          <div class="audio-player">
+                                            <button class="play-button" id="playButton">
+                                              <div class="play-icon"></div>
+                                              <div class="pause-icon"></div>
+                                            </button>
+                                            <div class="progress-bar" id="progressBar">
+                                              <div class="progress-fill" id="progressFill"></div>
+                                            </div>
+                                            <div class="time-display">
+                                              <span id="currentTime">00:00</span> / <span id="duration">00:00</span>
+                                            </div>
+                                            <a href="outlaw.mp3" download class="download-link">
+                                            </a>
+                                          </div>
+
+                                       </div>
+                                       <div style="float:left;width:984px;vertical-align:top;text-align:left;margin-left:0px;margin-top:10px;">
+                                       <div style="float:left;width:328px;height:276px;background-image:url('7a805c4a29c62b8cd829ea6575de24ea3c28523e');">
+                                       <div style="margin-left:14px;margin-top:14px;height:300px;width:300px;">
+                                       <div class="html1" style="width: 300px;text-align: left;overflow-x: auto;overflow-y: auto; background-color: rgba(0, 0, 0, 0);position: relative;display:inline-block;vertical-align:bottom;width:300px;height:250px;overflow-x:hidden;overflow-y:hidden;border-width: medium; border-style: none; margin: 0px; padding: 0px; border-color: white; ; z-index: 0"><div class="html" style="text-align:left;overflow-x:visible;overflow-y:visible;"><div class="body" style="vertical-align:bottom;min-height:250px;color:rgb(0, 0, 0);text-align:left;overflow-x:visible;overflow-y:visible;margin: 0px; padding: 0px; "><a href="#"  style="text-align:left;"><img src="33d8f820a9bdad4bf3a1072effae98459fe24b8d.png" style="width:300px;text-align:left;border-width: 0px; "/></a></div></div></div>
+                                       </div>
+                                       </div>
+                                       <div style="float:left;width:328px;height:276px;background-image:url('7a805c4a29c62b8cd829ea6575de24ea3c28523e');">
+                                       <div style="margin-left:14px;margin-top:14px;height:300px;width:300px;">
+                                       <div class="html1" style="width: 300px;text-align: left;overflow-x: auto;overflow-y: auto; background-color: rgba(0, 0, 0, 0);position: relative;display:inline-block;vertical-align:bottom;width:300px;height:250px;overflow-x:hidden;overflow-y:hidden;border-width: medium; border-style: none; margin: 0px; padding: 0px; border-color: white; ; z-index: 0"><div class="html" style="text-align:left;overflow-x:visible;overflow-y:visible;"><div class="body" style="vertical-align:bottom;min-height:250px;color:rgb(0, 0, 0);text-align:left;overflow-x:visible;overflow-y:visible;margin: 0px; padding: 0px; "><a href="#"  style="text-align:left;"><img src="ae5e2af7fb943bebbdf33c9df9db3b88f7771661.gif" style="width:300px;text-align:left;border-width: 0px; "/></a></div></div></div>
+                                       </div>
+                                       </div>
+                                       <div style="float:left;width:328px;height:276px;background-image:url('7a805c4a29c62b8cd829ea6575de24ea3c28523e');">
+                                       <div style="margin-left:14px;margin-top:14px;height:300px;width:300px;">
+                                       <div class="html1" style="width: 300px;text-align: left;overflow-x: auto;overflow-y: auto; background-color: rgba(0, 0, 0, 0);position: relative;display:inline-block;vertical-align:bottom;width:300px;height:250px;overflow-x:hidden;overflow-y:hidden;border-width: medium; border-style: none; margin: 0px; padding: 0px; border-color: white; ; z-index: 0"><div class="html" style="text-align:left;overflow-x:visible;overflow-y:visible;"><div class="body" style="vertical-align:bottom;min-height:250px;color:rgb(0, 0, 0);text-align:left;overflow-x:visible;overflow-y:visible;margin: 0px; padding: 0px; "><a href="#"  style="text-align:left;"><img src="397635702e20722e4cf032e90e57d9e2617a0cab.gif" style="width:300px;text-align:left;border-width: 0px; "/></a></div></div></div>
+                                       </div>
+                                       </div>
+                                       </div>
+                                       <div style="font-size:12px;line-height:18px;">
+                                       <div style="float:left;width:954px;vertical-align:top;text-align:left;margin-left:15px;">
+                                       <div style="max-width:1185px;margin-top:20px;padding: 0px 0px 5px; ">
+                                       <div style="text-align:center;">
+                                       <div style="background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAIkSURBVDjLjZPLaxpRGMWzsHQTpLvusgiF7rvuqn9L/4Muu/UxvlAUFa0SUWsU32+jg0iLi1KIohhREWnxTdU4aG2E5vS7AxHSWJvFwJ3H79xzzv3mCMDRoSudTksTiUQ+Fotx4XBY8vf7x8CFaDS6CoVCQiAQ4Hw+n+RRAqlUShqPxxm8Ho/HWK1WIPjG4/FwLpfr6UGBOzgSiayHwyFoDYoAQRBwdnb22+FwJG0225O9AslkUkof83cwA8/Pz0FxsFgsRCcECxaLhTOZTJK9MJW1HgwGIPvMNsgRLjsD6NMNxL5+g9lsvjUajSW9Xv9sB1NZUgJ4KkuEyQG8Xi9IFLPZDOaLJt5++IJ3nkt87w9BsKDVal/vhckBqCwx+3Q6RalUwo/ZHO8DFQQ+NZHgP0Oj0Ww5jnsjCtBufDAY3E4mE5AI3G63mJ3BJI5isYher4dGq4uPcZ7BNwS/2pVIcN7v99/2+310Oh3k83kRZg4ymQy63S4ajQayuQuo1eqNUqk8vXeM1LJQq9VwfX2NdruNVqslOmDNX11doVqtIpvNQqVS/ST45MEgUVmjcrksfjSfz9FsNkURtmulUhFdMFihUJzsHWWarOdOp3NbKBTEo2OtL5dL1Ot18DwPyvtLLpef7hu63cJutx9brdYp240dIcudy+UYvCH45b9G/t4NTdaxwWAYsfysQMq7kclkLw79cA8e6HS6Y2p6RLDwP5hdfwD40PFHzWBC4QAAAABJRU5ErkJggg==');display:inline-block;width:16px;height:16px;background-repeat: no-repeat; margin: 0px; padding: 0px; "></div>
+                                       <font style="font-size:13px;font-weight:bolder;text-decoration:underline;">hdyshare.com News:</font>
+                                       </div>
+                                       <div>
+                                       <div>
+                                       <div>
+                                       <div style="background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAEMSURBVDjL3ZLBSgJRFIYvtO0BfIPeI3qBNj2Cy1rWzlWbkcBNYhC0TletJKOFq1lIILhQJCywaDZOkINiGl/n3DNj6LaF4MDHGebc/5tz544D3H9w2yAI3LkQp7UgREJRSIS+0BJqwr6QTzkWulqdD09juD3Ah5PI7r8TiPvw0YJeDUq7cJ83NDzqwmUOFUyYT/ASfasGm6d4kQo1OB3JszN4fTDujuBrqP2hW4baVxbMBIuZTfAeQucGxm/w+WzB6AleGipo/Am06hTrEwQupLhjwkFdtlOFnzlc72n/cFWgQb3WJ8i22a7A44mtCfQQ7BSyL6617BtWZ+kphMKFlwSusrJmW/7ETQt+AQhq/TxibW0lAAAAAElFTkSuQmCC');display:inline-block;width:16px;height:16px;float:left;background-repeat: no-repeat; margin: 0px; padding: 0px; "></div>
+                                       <div style="float:left;margin-left:5px;width:600px;">
+                                       <strong><a href="#" style="text-decoration:underline;color:rgb(0, 0, 0);font-size:12px;line-height:18px;" >... and the first update of 2015 is behind us :-)</a></strong>
+                                       </div>
+                                       <br/>
+                                       <div style="margin-left:20px;font-size:10px;">11 Jan 2015 18:02</div>
+                                       </div>
+                                       <div style="font-size:12px;line-height:18px;margin: 1px 0pt 0pt 20px; ">
+                                       After quite a long time we finally managed to put together o meaningful update. &#60;strong&#62;&#60;u&#62;What has been changed?&#60;/u&#62;&#60;/strong&#62; &#60;strong&#62;- Link format.&#60;/strong&#62; Links are now alphanumeric and case... </div>
+                                       <br/>
+                                       </div>
+                                       <div>
+                                       <div>
+                                       <div style="background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAEMSURBVDjL3ZLBSgJRFIYvtO0BfIPeI3qBNj2Cy1rWzlWbkcBNYhC0TletJKOFq1lIILhQJCywaDZOkINiGl/n3DNj6LaF4MDHGebc/5tz544D3H9w2yAI3LkQp7UgREJRSIS+0BJqwr6QTzkWulqdD09juD3Ah5PI7r8TiPvw0YJeDUq7cJ83NDzqwmUOFUyYT/ASfasGm6d4kQo1OB3JszN4fTDujuBrqP2hW4baVxbMBIuZTfAeQucGxm/w+WzB6AleGipo/Am06hTrEwQupLhjwkFdtlOFnzlc72n/cFWgQb3WJ8i22a7A44mtCfQQ7BSyL6617BtWZ+kphMKFlwSusrJmW/7ETQt+AQhq/TxibW0lAAAAAElFTkSuQmCC');display:inline-block;width:16px;height:16px;float:left;background-repeat: no-repeat; margin: 0px; padding: 0px; "></div>
+                                       <div style="float:left;margin-left:5px;width:600px;">
+                                       <strong><a href="#" style="text-decoration:underline;color:rgb(0, 0, 0);font-size:12px;line-height:18px;" >Maintenance / Technical entry</a></strong>
+                                       </div>
+                                       <br/>
+                                       <div style="margin-left:20px;font-size:10px;">21 Dec 2013 15:04</div>
+                                       </div>
+                                       <div style="font-size:12px;line-height:18px;margin: 1px 0pt 0pt 20px; ">
+                                       Hey folks, This is maintenance/technical entry, we will update it when something goes wrong. &#60;strong&#62;Edit 21.12.2013:&#60;/strong&#62; Sorry for a little slowdowns on 41/42 and 43/44, we had to swap a ... </div>
+                                       <br/>
+                                       </div>
+                                       <div>
+                                       <div>
+                                       <div style="background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAEMSURBVDjL3ZLBSgJRFIYvtO0BfIPeI3qBNj2Cy1rWzlWbkcBNYhC0TletJKOFq1lIILhQJCywaDZOkINiGl/n3DNj6LaF4MDHGebc/5tz544D3H9w2yAI3LkQp7UgREJRSIS+0BJqwr6QTzkWulqdD09juD3Ah5PI7r8TiPvw0YJeDUq7cJ83NDzqwmUOFUyYT/ASfasGm6d4kQo1OB3JszN4fTDujuBrqP2hW4baVxbMBIuZTfAeQucGxm/w+WzB6AleGipo/Am06hTrEwQupLhjwkFdtlOFnzlc72n/cFWgQb3WJ8i22a7A44mtCfQQ7BSyL6617BtWZ+kphMKFlwSusrJmW/7ETQt+AQhq/TxibW0lAAAAAElFTkSuQmCC');display:inline-block;width:16px;height:16px;float:left;background-repeat: no-repeat; margin: 0px; padding: 0px; "></div>
+                                       <div style="float:left;margin-left:5px;width:600px;">
+                                       <strong><a href="#" style="text-decoration:underline;color:rgb(0, 0, 0);font-size:12px;line-height:18px;" >Quick update</a></strong>
+                                       </div>
+                                       <br/>
+                                       <div style="margin-left:20px;font-size:10px;">26 Oct 2013 17:51</div>
+                                       </div>
+                                       <div style="font-size:12px;line-height:18px;margin: 1px 0pt 0pt 20px; ">
+                                       We are still alive! Some of You were concerned by the lack of new messages on our blog so we took the opportunity to give You an update. Everything is going fine. We don't have any particularly exc... </div>
+                                       <br/>
+                                       </div>
+                                       </div>
+                                       </div></div>
+                                       <div style="float:left;width:477px;vertical-align:top;padding-top:10px;text-align:center;">
+                                       <font style="font-weight:bolder;line-height:25px;">To upload a file just follow these simple steps:</font>
+                                       </div>
+                                       <div style="float:right;width:477px;vertical-align:top;margin-right:20px;padding-top:10px;text-align:center;">
+                                       <font style="font-weight:bolder;line-height:25px;">Benefits of using hdyshare:</font>
+                                       </div>
+                                       <div style="float:left;width:477px;vertical-align:top;text-align:left;margin-left:10px;">
+                                       <b>1)</b>
+                                       Select a file to send by clicking the "Browse" button. You can then select photos, audio, video, documents or anything else you want to send. The maximum file size is 200 MB.<br/><br/><b>2)</b>
+                                       Click the "Start Upload" button to start uploading the file. You will see the progress of the file transfer. Please don't close your browser window while uploading or it will cancel the upload.<br/><br/><b>3)</b>
+                                       After a succesfull upload you'll receive a unique link to the download site, which you can place anywhere: on your homepage, blog, forum or send it via IM or e-mail to your friends.<br/><br/></div>
+                                       <div style="float:right;width:477px;vertical-align:top;text-align:left;margin-right:5px;margin-top:-3px;">
+                                       <font style="line-height:23px;">
+                                       <div>
+                                       <div style="background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAGrSURBVDjLvZPZLkNhFIV75zjvYm7VGFNCqoZUJ+roKUUpjRuqp61Wq0NKDMelGGqOxBSUIBKXWtWGZxAvobr8lWjChRgSF//dv9be+9trCwAI/vIE/26gXmviW5bqnb8yUK028qZjPfoPWEj4Ku5HBspgAz941IXZeze8N1bottSo8BTZviVWrEh546EO03EXpuJOdG63otJbjBKHkEp/Ml6yNYYzpuezWL4s5VMtT8acCMQcb5XL3eJE8VgBlR7BeMGW9Z4yT9y1CeyucuhdTGDxfftaBO7G4L+zg91UocxVmCiy51NpiP3n2treUPujL8xhOjYOzZYsQWANyRYlU4Y9Br6oHd5bDh0bCpSOixJiWx71YY09J5pM/WEbzFcDmHvwwBu2wnikg+lEj4mwBe5bC5h1OUqcwpdC60dxegRmR06TyjCF9G9z+qM2uCJmuMJmaNZaUrCSIi6X+jJIBBYtW5Cge7cd7sgoHDfDaAvKQGAlRZYc6ltJlMxX03UzlaRlBdQrzSCwksLRbOpHUSb7pcsnxCCwngvM2Rm/ugUCi84fycr4l2t8Bb6iqTxSCgNIAAAAAElFTkSuQmCC');display:inline-block;width:16px;height:16px;position:relative;right:3px;top:4px;vertical-align:top;background-repeat: no-repeat; margin: 0px; padding: 0px; "></div>
+                                       <div style="position:relative;top:0px;display:inline-block;width:456px;">hdyshare.com is completely free, reliable and popular way to store       files online.</div>
+                                       </div>
+                                       <div>
+                                       <div style="background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAGrSURBVDjLvZPZLkNhFIV75zjvYm7VGFNCqoZUJ+roKUUpjRuqp61Wq0NKDMelGGqOxBSUIBKXWtWGZxAvobr8lWjChRgSF//dv9be+9trCwAI/vIE/26gXmviW5bqnb8yUK028qZjPfoPWEj4Ku5HBspgAz941IXZeze8N1bottSo8BTZviVWrEh546EO03EXpuJOdG63otJbjBKHkEp/Ml6yNYYzpuezWL4s5VMtT8acCMQcb5XL3eJE8VgBlR7BeMGW9Z4yT9y1CeyucuhdTGDxfftaBO7G4L+zg91UocxVmCiy51NpiP3n2treUPujL8xhOjYOzZYsQWANyRYlU4Y9Br6oHd5bDh0bCpSOixJiWx71YY09J5pM/WEbzFcDmHvwwBu2wnikg+lEj4mwBe5bC5h1OUqcwpdC60dxegRmR06TyjCF9G9z+qM2uCJmuMJmaNZaUrCSIi6X+jJIBBYtW5Cge7cd7sgoHDfDaAvKQGAlRZYc6ltJlMxX03UzlaRlBdQrzSCwksLRbOpHUSb7pcsnxCCwngvM2Rm/ugUCi84fycr4l2t8Bb6iqTxSCgNIAAAAAElFTkSuQmCC');display:inline-block;width:16px;height:16px;position:relative;right:3px;top:4px;vertical-align:top;background-repeat: no-repeat; margin: 0px; padding: 0px; "></div><div style="position:relative;top:0px;display:inline-block;width:456px;">We offer fast download speeds.</div>
+                                       </div>
+                                       <div>
+                                       <div style="background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAGrSURBVDjLvZPZLkNhFIV75zjvYm7VGFNCqoZUJ+roKUUpjRuqp61Wq0NKDMelGGqOxBSUIBKXWtWGZxAvobr8lWjChRgSF//dv9be+9trCwAI/vIE/26gXmviW5bqnb8yUK028qZjPfoPWEj4Ku5HBspgAz941IXZeze8N1bottSo8BTZviVWrEh546EO03EXpuJOdG63otJbjBKHkEp/Ml6yNYYzpuezWL4s5VMtT8acCMQcb5XL3eJE8VgBlR7BeMGW9Z4yT9y1CeyucuhdTGDxfftaBO7G4L+zg91UocxVmCiy51NpiP3n2treUPujL8xhOjYOzZYsQWANyRYlU4Y9Br6oHd5bDh0bCpSOixJiWx71YY09J5pM/WEbzFcDmHvwwBu2wnikg+lEj4mwBe5bC5h1OUqcwpdC60dxegRmR06TyjCF9G9z+qM2uCJmuMJmaNZaUrCSIi6X+jJIBBYtW5Cge7cd7sgoHDfDaAvKQGAlRZYc6ltJlMxX03UzlaRlBdQrzSCwksLRbOpHUSb7pcsnxCCwngvM2Rm/ugUCi84fycr4l2t8Bb6iqTxSCgNIAAAAAElFTkSuQmCC');display:inline-block;width:16px;height:16px;position:relative;right:3px;top:4px;vertical-align:top;background-repeat: no-repeat; margin: 0px; padding: 0px; "></div><div style="position:relative;top:0px;display:inline-block;width:456px;">The maximum filesize for a single file is 200 MB.</div>
+                                       </div>
+                                       <div>
+                                       <div style="background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAGrSURBVDjLvZPZLkNhFIV75zjvYm7VGFNCqoZUJ+roKUUpjRuqp61Wq0NKDMelGGqOxBSUIBKXWtWGZxAvobr8lWjChRgSF//dv9be+9trCwAI/vIE/26gXmviW5bqnb8yUK028qZjPfoPWEj4Ku5HBspgAz941IXZeze8N1bottSo8BTZviVWrEh546EO03EXpuJOdG63otJbjBKHkEp/Ml6yNYYzpuezWL4s5VMtT8acCMQcb5XL3eJE8VgBlR7BeMGW9Z4yT9y1CeyucuhdTGDxfftaBO7G4L+zg91UocxVmCiy51NpiP3n2treUPujL8xhOjYOzZYsQWANyRYlU4Y9Br6oHd5bDh0bCpSOixJiWx71YY09J5pM/WEbzFcDmHvwwBu2wnikg+lEj4mwBe5bC5h1OUqcwpdC60dxegRmR06TyjCF9G9z+qM2uCJmuMJmaNZaUrCSIi6X+jJIBBYtW5Cge7cd7sgoHDfDaAvKQGAlRZYc6ltJlMxX03UzlaRlBdQrzSCwksLRbOpHUSb7pcsnxCCwngvM2Rm/ugUCi84fycr4l2t8Bb6iqTxSCgNIAAAAAElFTkSuQmCC');display:inline-block;width:16px;height:16px;position:relative;right:3px;top:4px;vertical-align:top;background-repeat: no-repeat; margin: 0px; padding: 0px; "></div><div style="position:relative;top:0px;display:inline-block;width:456px;">The file can be downloaded at any time and as often as you need it.</div>
+                                       </div>
+                                       <div>
+                                       <div style="background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAGrSURBVDjLvZPZLkNhFIV75zjvYm7VGFNCqoZUJ+roKUUpjRuqp61Wq0NKDMelGGqOxBSUIBKXWtWGZxAvobr8lWjChRgSF//dv9be+9trCwAI/vIE/26gXmviW5bqnb8yUK028qZjPfoPWEj4Ku5HBspgAz941IXZeze8N1bottSo8BTZviVWrEh546EO03EXpuJOdG63otJbjBKHkEp/Ml6yNYYzpuezWL4s5VMtT8acCMQcb5XL3eJE8VgBlR7BeMGW9Z4yT9y1CeyucuhdTGDxfftaBO7G4L+zg91UocxVmCiy51NpiP3n2treUPujL8xhOjYOzZYsQWANyRYlU4Y9Br6oHd5bDh0bCpSOixJiWx71YY09J5pM/WEbzFcDmHvwwBu2wnikg+lEj4mwBe5bC5h1OUqcwpdC60dxegRmR06TyjCF9G9z+qM2uCJmuMJmaNZaUrCSIi6X+jJIBBYtW5Cge7cd7sgoHDfDaAvKQGAlRZYc6ltJlMxX03UzlaRlBdQrzSCwksLRbOpHUSb7pcsnxCCwngvM2Rm/ugUCi84fycr4l2t8Bb6iqTxSCgNIAAAAAElFTkSuQmCC');display:inline-block;width:16px;height:16px;position:relative;right:3px;top:4px;vertical-align:top;background-repeat: no-repeat; margin: 0px; padding: 0px; "></div><div style="position:relative;top:0px;display:inline-block;width:456px;">File Life: 30 days after no activity.</div>
+                                       </div>
+                                       <div>
+                                       <div style="background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAGrSURBVDjLvZPZLkNhFIV75zjvYm7VGFNCqoZUJ+roKUUpjRuqp61Wq0NKDMelGGqOxBSUIBKXWtWGZxAvobr8lWjChRgSF//dv9be+9trCwAI/vIE/26gXmviW5bqnb8yUK028qZjPfoPWEj4Ku5HBspgAz941IXZeze8N1bottSo8BTZviVWrEh546EO03EXpuJOdG63otJbjBKHkEp/Ml6yNYYzpuezWL4s5VMtT8acCMQcb5XL3eJE8VgBlR7BeMGW9Z4yT9y1CeyucuhdTGDxfftaBO7G4L+zg91UocxVmCiy51NpiP3n2treUPujL8xhOjYOzZYsQWANyRYlU4Y9Br6oHd5bDh0bCpSOixJiWx71YY09J5pM/WEbzFcDmHvwwBu2wnikg+lEj4mwBe5bC5h1OUqcwpdC60dxegRmR06TyjCF9G9z+qM2uCJmuMJmaNZaUrCSIi6X+jJIBBYtW5Cge7cd7sgoHDfDaAvKQGAlRZYc6ltJlMxX03UzlaRlBdQrzSCwksLRbOpHUSb7pcsnxCCwngvM2Rm/ugUCi84fycr4l2t8Bb6iqTxSCgNIAAAAAElFTkSuQmCC');display:inline-block;width:16px;height:16px;position:relative;right:3px;top:4px;vertical-align:top;background-repeat: no-repeat; margin: 0px; padding: 0px; "></div><div style="position:relative;top:0px;display:inline-block;width:456px;">No ridiculous queues!</div>
+                                       </div>
+                                       <div>
+                                       <div style="background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAGrSURBVDjLvZPZLkNhFIV75zjvYm7VGFNCqoZUJ+roKUUpjRuqp61Wq0NKDMelGGqOxBSUIBKXWtWGZxAvobr8lWjChRgSF//dv9be+9trCwAI/vIE/26gXmviW5bqnb8yUK028qZjPfoPWEj4Ku5HBspgAz941IXZeze8N1bottSo8BTZviVWrEh546EO03EXpuJOdG63otJbjBKHkEp/Ml6yNYYzpuezWL4s5VMtT8acCMQcb5XL3eJE8VgBlR7BeMGW9Z4yT9y1CeyucuhdTGDxfftaBO7G4L+zg91UocxVmCiy51NpiP3n2treUPujL8xhOjYOzZYsQWANyRYlU4Y9Br6oHd5bDh0bCpSOixJiWx71YY09J5pM/WEbzFcDmHvwwBu2wnikg+lEj4mwBe5bC5h1OUqcwpdC60dxegRmR06TyjCF9G9z+qM2uCJmuMJmaNZaUrCSIi6X+jJIBBYtW5Cge7cd7sgoHDfDaAvKQGAlRZYc6ltJlMxX03UzlaRlBdQrzSCwksLRbOpHUSb7pcsnxCCwngvM2Rm/ugUCi84fycr4l2t8Bb6iqTxSCgNIAAAAAElFTkSuQmCC');display:inline-block;width:16px;height:16px;position:relative;right:3px;top:4px;vertical-align:top;background-repeat: no-repeat; margin: 0px; padding: 0px; "></div><div style="position:relative;top:0px;display:inline-block;width:456px;">No limits!</div>
+                                       </div>
+                                       </font>
+                                       </div>
+                                       </div>
+                                       <div style="float:left;width:954px;vertical-align:top;text-align:center;margin-bottom:10px;margin-top:15px;">
+                                       <font style="font-size:10px;color:rgb(0, 0, 0);font-weight:bolder;">Report illegal files, please <a href="http://archive.today/o/LZ6Ku/www.support.hdyshare.com/index.php?act=tickets&amp;code=open" style="font-size:10px;font-weight:normal;text-decoration:none;color:rgb(204, 0, 0);" >click here
+                                       </a>and send full link to us!</font>
+                                       </div>
+                                    </div>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <div style="vertical-align:top;text-align:center;margin: 10px 0px 5px; ">
+                  <font style="font-size:12px;color:rgb(0, 0, 0);font-weight:bolder;">© 2006-2015 hdyshare.com. All rights reserved.</font><br/>
+                  <div style="display:none;"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></div>
+                  <a href="#"  style="font-size:10px;font-weight:bolder;text-decoration:underline;word-spacing:1px;letter-spacing:1px;color:rgb(0, 0, 0);font-family:verdana;">Terms and Conditions</a>
+                  <font style="font-size:10px;color:rgb(0, 0, 0);">|</font>
+                  <a href="#"  style="font-size:10px;font-weight:bolder;text-decoration:underline;word-spacing:1px;letter-spacing:1px;color:rgb(0, 0, 0);font-family:verdana;">DMCA Policy</a>
+                  </div>
+               </div>
+               <div style="text-align:left;display:none;">
+               <a href="8271b6151ecd4b352b8ad9ab01943047a073bd9b.png" social="yes"  style="cursor:zoom-in"><img src="8271b6151ecd4b352b8ad9ab01943047a073bd9b.png" style="width:100px;height:100px;text-align:left;border-width: 0; "/></a></div>
+            </div>
+         </div>
+        </div>
+      </div>
+      <script>
+        const playButton = document.getElementById('playButton');
+        const playIcon = document.querySelector('.play-icon');
+        const pauseIcon = document.querySelector('.pause-icon');
+        const progressBar = document.getElementById('progressBar');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeDisplay = document.getElementById('currentTime');
+        const durationDisplay = document.getElementById('duration');
+    
+        const audio = new Audio('outlaw.mp3');
+        let isPlaying = false;
+    
+        function formatTime(seconds) {
+          const minutes = Math.floor(seconds / 60);
+          seconds = Math.floor(seconds % 60);
+          return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+    
+        audio.addEventListener('timeupdate', () => {
+          const progress = (audio.currentTime / audio.duration) * 100;
+          progressFill.style.width = `${progress}%`;
+          currentTimeDisplay.textContent = formatTime(audio.currentTime);
+        });
+    
+        audio.addEventListener('loadedmetadata', () => {
+          durationDisplay.textContent = formatTime(audio.duration);
+        });
+    
+        playButton.addEventListener('click', () => {
+          if (isPlaying) {
+            audio.pause();
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+          } else {
+            audio.play().catch(error => {
+              console.error('Error playing audio:', error);
+              // Handle the error (e.g., show an error message to the user)
+            });
+            playIcon.style.display = 'none';
+            pauseIcon.style.display = 'block';
+          }
+          isPlaying = !isPlaying;
+        });
+    
+        progressBar.addEventListener('click', (e) => {
+          const rect = progressBar.getBoundingClientRect();
+          const pos = (e.clientX - rect.left) / rect.width;
+          audio.currentTime = pos * audio.duration;
+        });
+    
+        audio.addEventListener('ended', () => {
+          isPlaying = false;
+          playIcon.style.display = 'block';
+          pauseIcon.style.display = 'none';
+          progressFill.style.width = '0%';
+          currentTimeDisplay.textContent = '00:00';
+        });
+
+        // Add error handling for audio loading
+        audio.addEventListener('error', (e) => {
+          console.error('Error loading audio:', e);
+          // Handle the error (e.g., show an error message to the user)
+        });
+
+        // Check if the audio file exists
+        fetch('outlaw.mp3')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Audio file not found');
+            }
+          })
+          .catch(error => {
+            console.error('Error checking audio file:', error);
+            // Handle the error (e.g., show an error message to the user)
+          });
+      </script>
+   </body>
+</html>

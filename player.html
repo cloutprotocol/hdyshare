@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio Player</title>
+  
+  <style>
+    .audio-player {
+      display: flex;
+      align-items: center;
+      background: #f5f5f5;
+      padding: 10px;
+      border-radius: 5px;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .play-button {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(145deg, #ffd700, #ffa500);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .play-icon {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 10px 0 10px 18px;
+      border-color: transparent transparent transparent white;
+      margin-left: 4px;
+    }
+
+    .pause-icon {
+      display: none;
+      width: 18px;
+      height: 18px;
+      position: relative;
+    }
+
+    .pause-icon::before,
+    .pause-icon::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 18px;
+      background: white;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .pause-icon::before {
+      left: 0px;
+    }
+
+    .pause-icon::after {
+      right: 0px;
+    }
+
+    .progress-bar {
+      flex-grow: 1;
+      height: 50px;
+      background: url('waveform.png') no-repeat;
+      background-size: 100% 100%;
+      border-radius: 5px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: rgba(255, 165, 0, 0.5);
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    .time-display {
+      font-family: monospace;
+      font-size: 12px;
+      color: #666;
+      margin-left: 10px;
+      min-width: 85px;
+    }
+
+    .download-link {
+      margin-left: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="audio-player">
+    <button class="play-button" id="playButton">
+      <div class="play-icon"></div>
+      <div class="pause-icon"></div>
+    </button>
+    <div class="progress-bar" id="progressBar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="time-display">
+      <span id="currentTime">00:00</span> / <span id="duration">00:00</span>
+    </div>
+    <a href="outlaw.mp3" download class="download-link">
+    </a>
+  </div>
+
+  <script>
+    const playButton = document.getElementById('playButton');
+    const playIcon = document.querySelector('.play-icon');
+    const pauseIcon = document.querySelector('.pause-icon');
+    const progressBar = document.getElementById('progressBar');
+    const progressFill = document.getElementById('progressFill');
+    const currentTimeDisplay = document.getElementById('currentTime');
+    const durationDisplay = document.getElementById('duration');
+
+    const audio = new Audio('outlaw.mp3');
+    let isPlaying = false;
+
+    function formatTime(seconds) {
+      const minutes = Math.floor(seconds / 60);
+      seconds = Math.floor(seconds % 60);
+      return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    audio.addEventListener('timeupdate', () => {
+      const progress = (audio.currentTime / audio.duration) * 100;
+      progressFill.style.width = `${progress}%`;
+      currentTimeDisplay.textContent = formatTime(audio.currentTime);
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+      durationDisplay.textContent = formatTime(audio.duration);
+    });
+
+    playButton.addEventListener('click', () => {
+      if (isPlaying) {
+        audio.pause();
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+      } else {
+        audio.play();
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+      }
+      isPlaying = !isPlaying;
+    });
+
+    progressBar.addEventListener('click', (e) => {
+      const rect = progressBar.getBoundingClientRect();
+      const pos = (e.clientX - rect.left) / rect.width;
+      audio.currentTime = pos * audio.duration;
+    });
+
+    audio.addEventListener('ended', () => {
+      isPlaying = false;
+      playIcon.style.display = 'block';
+      pauseIcon.style.display = 'none';
+      progressFill.style.width = '0%';
+      currentTimeDisplay.textContent = '00:00';
+    });
+  </script>
+</body>
+</html>
